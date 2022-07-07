@@ -1,13 +1,7 @@
 console.log("test console")
 
 function api() {
-
-    let htmlproduit =   '<a href="./product.html?id=42"> <article><img src=".../product01.jpg" alt="Lorem ipsum dolor sit amet, Kanap name1"><h3 class="productName">Kanap name1</h3><p class="productDescription">Dis enim malesuada risus sapien gravida nulla nisl arcu. Dis enim malesuada risus sapien gravida nulla nisl arcu.</p> </article>  </a>';
-   
-        
-                      
-
-
+       
     console.log("Je suis dans la fonction api()");
    
     fetch("http://localhost:3000/api/products")
@@ -21,13 +15,20 @@ function api() {
             console.log(products);
 
             let items = document.getElementById("items");
-
+            
             for(let i=0;i<products.length;i++) {
                 console.log("Je prends le produit " + i);
                 console.log(products[i].name);
                 
-                items.innerHTML = htmlproduit;
-            }
+                let productImageUrl = products[i].imageUrl;
+                let productaltTxt = products[i].altTxt;
+                let productName = products[i].name;
+                let productDescription = products[i].description;
+
+                    items.innerHTML =   '<a href="./product.html?id=42"> <article> <img src='+ productImageUrl + 
+                                        'alt=' + productaltTxt + ' ><h3 class="productName">'+ productName +
+                                        '</h3><p class="productDescription">'+ productDescription + '</p> </article>  </a>';
+            }                   
         })
         .catch(function(_err) {
             console.log("Erreur !");
