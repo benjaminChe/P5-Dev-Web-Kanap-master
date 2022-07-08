@@ -19,11 +19,14 @@ function api() {
             for(let i=0;i<products.length;i++) {
                 console.log("Je prends le produit " + i);
                 console.log(products[i].name);
-                
-                let productImageUrl = products[i].imageUrl;
+
+                let productImageUrl  = products[i].imageUrl;
                 let productaltTxt = products[i].altTxt;
                 let productName = products[i].name;
                 let productDescription = products[i].description;
+
+                eval("productImageUrl" + i +" products[i].imageUrl") ;
+                
 
                     items.innerHTML =   '<a href="./product.html?id=42"> <article> <img src='+ productImageUrl + 
                                         'alt=' + productaltTxt + ' ><h3 class="productName">'+ productName +
