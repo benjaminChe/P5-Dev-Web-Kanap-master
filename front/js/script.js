@@ -21,15 +21,13 @@ function api() {
                 console.log(products[i].name);
 
                 let productImageUrl  = products[i].imageUrl;
-                let productaltTxt = products[i].altTxt;
+                let productAltTxt = products[i].altTxt;
                 let productName = products[i].name;
                 let productDescription = products[i].description;
 
-                eval("productImageUrl" + i +" products[i].imageUrl") ;
-                
-
-                    items.innerHTML =   '<a href="./product.html?id=42"> <article> <img src='+ productImageUrl + 
-                                        'alt=' + productaltTxt + ' ><h3 class="productName">'+ productName +
+               
+                     items.innerHTML +=  '<a href="./product.html?id=42"> <article> <img src='+ productImageUrl + 
+                                        'alt='+ productAltTxt + ' ><h3 class="productName">'+ productName +
                                         '</h3><p class="productDescription">'+ productDescription + '</p> </article>  </a>';
             }                   
         })
