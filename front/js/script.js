@@ -1,6 +1,6 @@
 console.log("test console")
 
-function api() {
+function apiAccueil() {
        
     console.log("Je suis dans la fonction api()");
    
@@ -25,10 +25,14 @@ function api() {
                 let productName = products[i].name;
                 let productDescription = products[i].description;
 
-               
-                     items.innerHTML +=  '<a href="./product.html?id=42"> <article> <img src='+ productImageUrl + 
-                                        'alt='+ productAltTxt + ' ><h3 class="productName">'+ productName +
-                                        '</h3><p class="productDescription">'+ productDescription + '</p> </article>  </a>';
+                items.innerHTML += `<a href="./product.html?id=${products[i]._id}">
+                    <article>
+                    <img src="${products[i].imageUrl}" alt="${productAltTxt}">
+                    <h3 class="productName">${productName}</h3>
+                    <p class="productDescription">${productDescription}</p>
+                    </article>
+                </a>`;
+                
             }                   
         })
         .catch(function(_err) {
@@ -37,25 +41,6 @@ function api() {
         });  
 }
 
-console.log("J'appele la fonction api()")
-api();
+apiAccueil();
 
-/*
-function addition(a, b) {
-    console.log("Addition de a et b :", a+b);
-    return a + b;
-}
-
-addition(3, 5);
-*/
-
-
-
-/*class produit {
-    constructor(nom, description, image){
-        this.nom = nom;
-        this.description = description;
-        this.image = image;
-    }
-}*/
 
