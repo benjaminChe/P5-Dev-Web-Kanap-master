@@ -15,8 +15,23 @@ function apiPageProduit() {
             console.log(product);
 
             let itemImg = document.getElementsByClassName("item__img");
-            console.log(itemImg)
-            itemImg[0].innerHTML = `<img src="${product.imageUrl}" alt="${product.altTxt}">`;          
+            let itemName = document.getElementById("title");
+            let itemPrice = document.getElementById("price");
+            let itemDescription = document.getElementById("description");
+            let itemColors = document.getElementById("colors")
+
+
+            itemImg[0].innerHTML = `<img src="${product.imageUrl}" alt="${product.altTxt}">`;    
+            itemName.innerHTML = product.name  ;
+            itemPrice.innerHTML = product.price;
+            itemDescription.innerHTML = product.description;
+           
+                 
+            for(let i=0;i<product.colors.length;i++){
+                
+                let ColorsValue = product.colors[i]
+                itemColors.innerHTML +=  `<option value="${ColorsValue}">${ColorsValue}</option>` ;
+            }
         })
         .catch(function(_err) {
             console.log("Erreur !");

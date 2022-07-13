@@ -27,7 +27,7 @@ function apiAccueil() {
 
                 items.innerHTML += `<a href="./product.html?id=${products[i]._id}">
                     <article>
-                    <img src="${products[i].imageUrl}" alt="${productAltTxt}">
+                    <img src="${productImageUrl}" alt="${productAltTxt}">
                     <h3 class="productName">${productName}</h3>
                     <p class="productDescription">${productDescription}</p>
                     </article>
