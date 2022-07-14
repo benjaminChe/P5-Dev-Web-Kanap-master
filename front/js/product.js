@@ -1,6 +1,6 @@
 function apiPageProduit() {
 
-    let url = window.location.search; //product.html?id=blablabla
+    let url = window.location.search;
     let params = new URLSearchParams(url);
     let id = params.get("id");
        
@@ -26,7 +26,8 @@ function apiPageProduit() {
             itemPrice.innerHTML = product.price;
             itemDescription.innerHTML = product.description;
            
-                 
+            
+
             for(let i=0;i<product.colors.length;i++){
                 
                 let ColorsValue = product.colors[i]
@@ -40,3 +41,27 @@ function apiPageProduit() {
 }
 
 apiPageProduit();
+
+const BoutonAjouterAuPanier = document.getElementById("addToCart");
+BoutonAjouterAuPanier.addEventListener('click', AjouterAuPanier() ) ;
+
+function AjouterAuPanier(){
+    let url = window.location.search;
+    let params = new URLSearchParams(url);
+    let id = params.get("id");
+       
+
+    let quantité = document.getElementById("quantity").value;
+    let CouleurChoisie = document.getElementById('colors').selectedIndex;
+    
+    localStorage.setItem("id", id);
+    localStorage.setItem("quantité", quantité);
+    localStorage.setItem("CouleurChoisie", CouleurChoisie);
+    console.log(localStorage);
+    
+}
+
+
+
+   
+
