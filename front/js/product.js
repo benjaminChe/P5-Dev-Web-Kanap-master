@@ -69,8 +69,10 @@ function AjouterAuPanier(){
 
     //IF l'item existe déjà dans lepanier
         // Alors j'ajoute à la quantité
+        // Filter / Find / panier.find(...) /
     // SINON, il n'existe pas 
         // => panier.push(lignePanier);
+
     localStorage.setItem("panier", JSON.stringify(panier))
     console.log("Nouveau panier");
     console.log(panier);
