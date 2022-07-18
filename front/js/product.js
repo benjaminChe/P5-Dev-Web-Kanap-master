@@ -42,18 +42,29 @@ function apiPageProduit() {
 
 apiPageProduit();
 
-const BoutonAjouterAuPanier = document.getElementById("addToCart");
-BoutonAjouterAuPanier.addEventListener('click', AjouterAuPanier() ) ;
-
 function AjouterAuPanier(){
     let url = window.location.search;
     let params = new URLSearchParams(url);
     let id = params.get("id");
-       
+    console.log('clique détecté')
 
     let quantité = document.getElementById("quantity").value;
     let CouleurChoisie = document.getElementById('colors').selectedIndex;
-    
+    let Panier = [id, quantité, CouleurChoisie]
+
+    localStorage.setItem = [Panier]
+    console.log(localStorage)
+}
+
+const BoutonAjouterAuPanier = document.getElementById("addToCart");
+
+BoutonAjouterAuPanier.addEventListener ('click', AjouterAuPanier());
+console.log()
+
+
+
+
+/*   
     localStorage.setItem("id", id);
     localStorage.setItem("quantité", quantité);
     localStorage.setItem("CouleurChoisie", CouleurChoisie);
@@ -61,7 +72,9 @@ function AjouterAuPanier(){
     
 }
 
-
-
    
+
+*/
+
+
 
