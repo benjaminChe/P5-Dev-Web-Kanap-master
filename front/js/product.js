@@ -67,9 +67,9 @@ function AjouterAuPanier(){
         panier = JSON.parse(panier);
     }
 
-    let panierFindId = panier.find(id  == lignePanier[id])
-    console.log("panierFindId =" + panierFindId)
-    let panierFindCouleurChoisie = panier.find(CouleurChoisie == lignePanier[CouleurChoisie])
+    let panierFindId = panier.find(id  == panier[id])
+    console.log("panierFindId =" + panierFindId) 
+    let panierFindCouleurChoisie = panier.find(CouleurChoisie == panier[CouleurChoisie])
     console.log(panierFindCouleurChoisie)
     
 
