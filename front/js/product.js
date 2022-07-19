@@ -61,18 +61,25 @@ function AjouterAuPanier(){
     console.log(lignePanier);
 
     let panier = localStorage.getItem("panier");
-    if(!panier) { // Le panier n'a jamais été créé
+    if(!panier) { 
         panier = []
-    } else { // Le panier existe déjà
+    } else { 
         panier = JSON.parse(panier);
     }
 
-    //IF l'item existe déjà dans lepanier
-        // Alors j'ajoute à la quantité
-        // Filter / Find / panier.find(...) /
-    // SINON, il n'existe pas 
-        // => panier.push(lignePanier);
+    let panierFindId = panier.find(id  == lignePanier[id])
+    console.log("panierFindId =" + panierFindId)
+    let panierFindCouleurChoisie = panier.find(CouleurChoisie == lignePanier[CouleurChoisie])
+    console.log(panierFindCouleurChoisie)
+    
 
+    if(panierFindId && panierFindCouleurChoisie) {
+        console.log("trouvé !")
+    }
+    else{ 
+            panier.push(lignePanier);
+
+        }
     localStorage.setItem("panier", JSON.stringify(panier))
     console.log("Nouveau panier");
     console.log(panier);
@@ -82,22 +89,10 @@ const BoutonAjouterAuPanier = document.getElementById("addToCart");
 
 BoutonAjouterAuPanier.addEventListener ('click', AjouterAuPanier);
 
-console.log()
 
 
 
 
-/*   
-    localStorage.setItem("id", id);
-    localStorage.setItem("quantité", quantité);
-    localStorage.setItem("CouleurChoisie", CouleurChoisie);
-    console.log(localStorage);
-    
-}
-
-   
-
-*/
 
 
 
