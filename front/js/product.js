@@ -67,16 +67,23 @@ function AjouterAuPanier(){
         panier = JSON.parse(panier);
     }
 
-    let panierFindId = panier.find(id  == panier[id])
-    console.log("panierFindId =" + panierFindId) 
-    let panierFindCouleurChoisie = panier.find(CouleurChoisie == panier[CouleurChoisie])
-    console.log(panierFindCouleurChoisie)
+    
+    console.log("panier id :"+lignePanier["id"]+"+ panier couleur :"+lignePanier["couleur"] +"+ panier quantité :"+lignePanier["quantite"])
     
 
-    if(panierFindId && panierFindCouleurChoisie) {
-        console.log("trouvé !")
+    if(panier.length === 0){
+        console.log("le panier est vide");
+            panier.push(lignePanier);
+    }
+    else if(id == lignePanier["id"] && CouleurChoisie == lignePanier["couleur"]) {
+            console.log("deja present donc addition !");
+            let newQuantite = lignePanier["quantite"] +  parseInt(quantité);
+            console.log(newQuantite)
+            panier.splice(2, 1, newQuantite);
+            panier.push(lignePanier); 
     }
     else{ 
+            console.log("ici le else");
             panier.push(lignePanier);
 
         }
