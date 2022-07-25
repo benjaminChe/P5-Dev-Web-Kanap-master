@@ -69,24 +69,21 @@ function AjouterAuPanier(){
 
     
     console.log("panier id :"+lignePanier["id"]+"+ panier couleur :"+lignePanier["couleur"] +"+ panier quantité :"+lignePanier["quantite"])
-    
 
-    if(panier.length === 0){
-        console.log("le panier est vide");
-            panier.push(lignePanier);
-    }
-    else if(id == lignePanier["id"] && CouleurChoisie == lignePanier["couleur"]) {
-            console.log("deja present donc addition !");
-            let newQuantite = lignePanier["quantite"] +  parseInt(quantité);
-            console.log(newQuantite)
-            panier.splice(2, 1, newQuantite);
-            
-    }
-    else{ 
-            console.log("ici le else");
-            panier.push(lignePanier);
+    var ligneTrouvee = panier.find(function (el) {
+        return el["id"] === lignePanier["id"] && el["couleur"] === lignePanier["couleur"];
+    });
 
-        }
+    if(!ligneTrouvee){ // Soit elle existe aps (ligneTrouvee est undefined)
+        console.log("Ligne Introuvable, on la crée");
+        panier.push(lignePanier);
+    }
+    else { // soit elle existe
+        console.log("Ligne deja presente donc addition !");
+        ligneTrouvee["quantite"] = ligneTrouvee["quantite"] + parseInt(quantité);
+        console.log("Nouvelle quantité : " + ligneTrouvee["quantite"]);           
+    }
+
     localStorage.setItem("panier", JSON.stringify(panier))
     console.log("Nouveau panier");
     console.log(panier);

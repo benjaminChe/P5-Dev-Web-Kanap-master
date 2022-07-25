@@ -1,22 +1,22 @@
-function apiPanier() {
-
-    
-       
+function affichagePanier() {
     fetch("http://localhost:3000/api/products/" )
         .then(function(res) {
             if (res.ok) {
                 return res.json(); 
             }
         })
-        .then (function(product) {
+        .then (function(products) {
             console.log("Le produit reçu :")
-            console.log(product);
+            console.log(products);
 
             let itemPanier = document.getElementById("cart__items")
+            // Boucle sur le panier 
 
-           for (let i in product){
+            // Pour chaque élément du panier : aller chercher dans products la description, la photo, le titre, etc..
+            // Fusionner les deux tableaux
 
-            itemPanier.innerHTML += ` <article class="cart__item" data-id="{product-ID}" data-color="{product-color}">
+           for (let i in products){
+            itemPanier.innerHTML += ` <article class="cart__item" data-id="${id}" data-color="${color}">
             <div class="cart__item__img">
               <img src="../images/product01.jpg" alt="Photographie d'un canapé">
             </div>
@@ -46,4 +46,4 @@ function apiPanier() {
         });  
 }
 
-apiPanier();
+affichagePanier();
