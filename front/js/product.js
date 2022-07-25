@@ -80,7 +80,7 @@ function AjouterAuPanier(){
             let newQuantite = lignePanier["quantite"] +  parseInt(quantité);
             console.log(newQuantite)
             panier.splice(2, 1, newQuantite);
-            panier.push(lignePanier); 
+            
     }
     else{ 
             console.log("ici le else");
