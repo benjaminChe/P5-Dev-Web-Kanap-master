@@ -70,7 +70,7 @@ function AjouterAuPanier(){
     
     console.log("panier id :"+lignePanier["id"]+"+ panier couleur :"+lignePanier["couleur"] +"+ panier quantité :"+lignePanier["quantite"])
 
-    var ligneTrouvee = panier.find(function (el) {
+    let ligneTrouvee = panier.find(function (el) {
         return el["id"] === lignePanier["id"] && el["couleur"] === lignePanier["couleur"];
     });
 
