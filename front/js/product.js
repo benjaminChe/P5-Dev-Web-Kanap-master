@@ -74,11 +74,11 @@ function AjouterAuPanier(){
         return el["id"] === lignePanier["id"] && el["couleur"] === lignePanier["couleur"];
     });
 
-    if(!ligneTrouvee){ // Soit elle existe aps (ligneTrouvee est undefined)
+    if(!ligneTrouvee){
         console.log("Ligne Introuvable, on la crée");
         panier.push(lignePanier);
     }
-    else { // soit elle existe
+    else { 
         console.log("Ligne deja presente donc addition !");
         ligneTrouvee["quantite"] = ligneTrouvee["quantite"] + parseInt(quantité);
         console.log("Nouvelle quantité : " + ligneTrouvee["quantite"]);           
