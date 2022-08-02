@@ -3,10 +3,12 @@ function affichagePanier() {
         
             
 
-            let interfacePanier = document.getElementById("cart__items");
+            const interfacePanier = document.getElementById("cart__items");
             let panier = JSON.parse(localStorage.getItem("panier"));
             console.log("panier.lenght = "+ panier.length);
+            const divPrixTotal = document.getElementById("totalPrice")
            
+            
             
            for (let i in panier){
             
@@ -36,7 +38,7 @@ function affichagePanier() {
               </div>
               <div class="cart__item__content__settings">
                 <div class="cart__item__content__settings__quantity">
-                  <p>Qté : ${quantite} </p>
+                  <p>Qté :</p>
                   <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${quantite}">
                 </div>
                 <div class="cart__item__content__settings__delete">
@@ -45,6 +47,8 @@ function affichagePanier() {
               </div>
             </div>
           </article>`
+         
+          
 
     })
     .catch(function(_err) {
@@ -54,11 +58,20 @@ function affichagePanier() {
 
             
            }
-        // Boucle sur le panier 
-            // Pour chaque élément du panier : aller chercher dans products la description, la photo, le titre, etc..
-            // Fusionner les deux tableaux
-        
+ 
+          let productPrice = product.price
+          let prixTotal = product.price * quantite
+          divPrixTotal.innerHTML = prixTotal;
        
 }
 
 affichagePanier();
+
+
+const quantityItemCart = document.getElementsByClassName("itemQuantity");
+
+quantityItemCart[0].addEventListener('change', function (){
+
+  let newQantite = document.getElementsByClassName("itemQuantity").value;
+  
+})
