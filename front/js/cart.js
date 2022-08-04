@@ -3,7 +3,7 @@ function affichagePanier() {
   let panier = JSON.parse(localStorage.getItem("panier"));
   console.log("panier.lenght = "+ panier.length);
   const divPrixTotal = document.getElementById("totalPrice")
-  
+  const divQuantiteTotal = document.getElementById("totalQuantity")
   fetch("http://localhost:3000/api/products/")
     .then(function(res) {
       if (res.ok) {
@@ -12,6 +12,7 @@ function affichagePanier() {
     })
     .then (function(products) {
       let prixTotal = 0;
+      let quantiteTotal = 0
       for (let i in panier) {
         let id = panier[i]["id"];
         let color = panier[i]["couleur"];
@@ -27,6 +28,7 @@ function affichagePanier() {
         let prixLigne = product.price * quantite;
         prixTotal = prixTotal + prixLigne;
         console.log("Prix total : " + prixTotal);
+        quantiteTotal = quantiteTotal + quantite
 
         interfacePanier.innerHTML += ` <article class="cart__item" data-id="${id}" data-color="${color}">
           <div class="cart__item__img">
@@ -52,6 +54,7 @@ function affichagePanier() {
       }
       // Tout les produits ont bien été ajouté
       divPrixTotal.innerHTML = prixTotal;
+      divQuantiteTotal.innerHTML = quantiteTotal
 
       // Ajout des listener pour le changement de quantité
       const quantityItemCart = document.getElementsByClassName("itemQuantity");
@@ -61,11 +64,19 @@ function affichagePanier() {
           let newQuantite = event.target.value;
 
           let article = event.target.closest("article");
-          let id = article.getAttribute("data-id");
-          let color = article.getAttribute("data-color");
+          let dataId = article.getAttribute("data-id");
+          let dataColor = article.getAttribute("data-color");
           
           //  Changer dans le localstorage la quantité
           console.log("Nouvelle quantité : " + newQuantite);
+
+          let articlePanierTrouvee = panier.find(function (el) {
+            return dataId === el["id"]  && dataColor === el["couleur"];
+          });
+          articlePanierTrouvee["quantite"] = newQuantite
+          console.log("article panier trouvee = "+ articlePanierTrouvee["id"]+ articlePanierTrouvee["couleur"]+ articlePanierTrouvee["quantite"])
+          // modifier le panier puis le repush dans localstorage via ci dessous
+         // localStorage["panier"] = JSON.stringify(panier)
 
           // .... Puis : recalculer le total et la quantité totale du panier
         })
