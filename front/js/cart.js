@@ -1,3 +1,40 @@
+function calculerPrixQte(){
+
+  let panier = JSON.parse(localStorage.getItem("panier"));
+  const divPrixTotal = document.getElementById("totalPrice")
+  const divQuantiteTotal = document.getElementById("totalQuantity")
+  fetch("http://localhost:3000/api/products/")
+    .then(function(res) {
+      if (res.ok) {
+          return res.json(); 
+      }
+    })
+    .then (function(products) {
+      let prixTotal = 0;
+      let quantiteTotal = 0
+      for (let i in panier) {
+        let id = panier[i]["id"];
+        let quantite = panier[i]["quantite"];
+        let product = products.find(function (p) {
+          return p._id === id;
+        });
+      
+        console.log("Le produit trouvé :")
+        console.log(product);
+
+        let prixLigne = product.price * quantite;
+        prixTotal = prixTotal + prixLigne;
+        console.log("Prix total : " + prixTotal);
+        quantiteTotal = quantiteTotal + quantite;
+        console.log("Qte total : " + quantiteTotal);
+
+      }
+      divPrixTotal.innerHTML = prixTotal;
+      divQuantiteTotal.innerHTML = quantiteTotal
+
+    })
+}
+
 function affichagePanier() {
   const interfacePanier = document.getElementById("cart__items");
   let panier = JSON.parse(localStorage.getItem("panier"));
@@ -67,18 +104,23 @@ function affichagePanier() {
           let dataId = article.getAttribute("data-id");
           let dataColor = article.getAttribute("data-color");
           
-          //  Changer dans le localstorage la quantité
+          
           console.log("Nouvelle quantité : " + newQuantite);
 
           let articlePanierTrouvee = panier.find(function (el) {
             return dataId === el["id"]  && dataColor === el["couleur"];
           });
-          articlePanierTrouvee["quantite"] = newQuantite
-          console.log("article panier trouvee = "+ articlePanierTrouvee["id"]+ articlePanierTrouvee["couleur"]+ articlePanierTrouvee["quantite"])
-          // modifier le panier puis le repush dans localstorage via ci dessous
-         // localStorage["panier"] = JSON.stringify(panier)
+          articlePanierTrouvee["quantite"] = parseInt(newQuantite);
+          
+          for(let key in panier) {
+            console.log(key + " = ", panier[key]);
+          }
 
-          // .... Puis : recalculer le total et la quantité totale du panier
+          localStorage["panier"] = JSON.stringify(panier)
+          
+          calculerPrixQte();
+
+          
         })
       }
 
@@ -88,5 +130,6 @@ function affichagePanier() {
       console.log(_err);
     });  
 }
+
 
 affichagePanier();
