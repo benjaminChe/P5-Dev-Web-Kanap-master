@@ -41,6 +41,7 @@ function affichagePanier() {
   console.log("panier.lenght = "+ panier.length);
   const divPrixTotal = document.getElementById("totalPrice")
   const divQuantiteTotal = document.getElementById("totalQuantity")
+  const btnDelete = document.getElementsByClassName("deleteItem")
   fetch("http://localhost:3000/api/products/")
     .then(function(res) {
       if (res.ok) {
@@ -97,6 +98,23 @@ function affichagePanier() {
       const quantityItemCart = document.getElementsByClassName("itemQuantity");
 
       for(let i = 0;i<quantityItemCart.length;i++) {
+
+        btnDelete[i].addEventListener("click", function(event){
+          console.log("clique sur btn supprimer")
+          let article = event.target.closest("article");
+          let dataId = article.getAttribute("data-id");
+          let dataColor = article.getAttribute("data-color");
+          let articlePanierTrouvee = panier.find(function (el) {
+            return dataId === el["id"]  && dataColor === el["couleur"];
+          });
+          let indexArticlePanierTrouvee = panier.indexOf(articlePanierTrouvee);
+          console.log("indexArticlePanierTrouvee = "+indexArticlePanierTrouvee)
+          panier.splice(indexArticlePanierTrouvee, 1);
+          localStorage["panier"] = JSON.stringify(panier);
+          article.remove();
+          calculerPrixQte();
+        })
+
         quantityItemCart[i].addEventListener('change', function (event){
           let newQuantite = event.target.value;
 
