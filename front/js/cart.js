@@ -100,7 +100,7 @@ function affichagePanier() {
       for(let i = 0;i<quantityItemCart.length;i++) {
 
         btnDelete[i].addEventListener("click", function(event){
-          console.log("clique sur btn supprimer")
+          
           let article = event.target.closest("article");
           let dataId = article.getAttribute("data-id");
           let dataColor = article.getAttribute("data-color");
