@@ -174,35 +174,12 @@ let contact = {
   city: city,
   email: email };
 
-formFirstName.addEventListener("change",function(event){
-  
-  firstName = event.target.value
-  // RegExp([A-Za-z]) 
-  console.log("firstName = "+firstName)
-  });
-  formLastName.addEventListener("change",function(event){
-
-  lastName = event.target.value
-  console.log("lastName = "+lastName)
-});
-formAddress.addEventListener("change",function(event){
-
-  address = event.target.value
-  console.log("address = "+address)
-});
-formCity.addEventListener("change",function(event){
-
-  city = event.target.value
-  console.log("city = "+city)
-});
-formEmail.addEventListener("change",function(event){
-
-  email = event.target.value
-  console.log("email = "+email) 
-});
 
 order.addEventListener("click",function(event){
   event.preventDefault()
+  // maintenant faut verifier que tout ce qui a était saisie est correct    -->   RegExp([A-Za-z]) 
+  // si tous est correct alors declarer les variables
+  // puis submit
 
 });
 
