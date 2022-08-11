@@ -59,9 +59,6 @@ function affichagePanier() {
         let product = products.find(function (p) {
           return p._id === id;
         });
-      
-        console.log("Le produit trouvé :")
-        console.log(product);
 
         let prixLigne = product.price * quantite;
         prixTotal = prixTotal + prixLigne;
@@ -128,7 +125,7 @@ function affichagePanier() {
           let articlePanierTrouvee = panier.find(function (el) {
             return dataId === el["id"]  && dataColor === el["couleur"];
           });
-          articlePanierTrouvee["quantite"] = parseInt(newQuantite);
+            articlePanierTrouvee["quantite"] = parseInt(newQuantite);
           
           for(let key in panier) {
             console.log(key + " = ", panier[key]);
@@ -151,3 +148,64 @@ function affichagePanier() {
 
 
 affichagePanier();
+
+
+
+
+function formulaireContact() {
+  
+const order =  document.getElementById("order") 
+const formFirstName = document.getElementById("firstName")
+const formLastName = document.getElementById("lastName")
+const formAddress = document.getElementById("address")
+const formCity = document.getElementById("city")
+const formEmail = document.getElementById("email")
+
+let firstName = "";
+let lastName = "";
+let address = "";
+let city = "";
+let email = "";
+
+let contact = {
+  firstName: firstName,
+  lastName: lastName,
+  address: address,
+  city: city,
+  email: email };
+
+formFirstName.addEventListener("change",function(event){
+  
+  firstName = event.target.value
+  // RegExp([A-Za-z]) 
+  console.log("firstName = "+firstName)
+  });
+  formLastName.addEventListener("change",function(event){
+
+  lastName = event.target.value
+  console.log("lastName = "+lastName)
+});
+formAddress.addEventListener("change",function(event){
+
+  address = event.target.value
+  console.log("address = "+address)
+});
+formCity.addEventListener("change",function(event){
+
+  city = event.target.value
+  console.log("city = "+city)
+});
+formEmail.addEventListener("change",function(event){
+
+  email = event.target.value
+  console.log("email = "+email) 
+});
+
+order.addEventListener("click",function(event){
+  event.preventDefault()
+
+});
+
+}
+
+formulaireContact();
