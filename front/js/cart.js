@@ -151,11 +151,17 @@ affichagePanier();
 
 function formulaireContact() {
 
-const formulaire = document.getElementsByClassName("cart__order__form")
+
 const order =  document.getElementById("order") 
 const regExName = /[^a-zA-Z]/;
 const regExAddress = /^[a-zA-Z0-9\s,'-]$/;
 const refExEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+let panier = JSON.parse(localStorage.getItem("panier"));
+let products = []
+for (let i in panier){
+products.push(panier[i].id)
+}
+console.log(products)
 
 
 
@@ -206,10 +212,11 @@ let emailValid = false;
     }
   if(email.search(refExEmail)==-1){
       alert("Email invalide");
-      emailValid = true
+      
     }
   else{
       console.log("email valide");
+      emailValid = true
     }
 
 if(firstNameValid==true && lastNameValid==true && addressValid==true && cityValid==true && emailValid==true){
@@ -220,13 +227,26 @@ if(firstNameValid==true && lastNameValid==true && addressValid==true && cityVali
     address: address,
     city: city,
     email: email };
-}
-      
-formulaire[0].submit();
-  
-  
 
-});
+console.log("contact = "+JSON.stringify(contact))
+
+fetch("http://localhost:3000/api/products/",{
+  method: "POST",
+  headers: {
+    'Accept': 'application/json', 
+    'Content-Type': 'application/json' 
+  },
+  body: JSON.stringify({contact, products})
+})
+.then(function(res) {
+    if (res.ok) {
+      return res.json(); 
+    }})
+.catch(function(res){ console.log(res) })
+
+  
+  
+}});
 
 }
 

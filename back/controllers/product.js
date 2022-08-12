@@ -8,6 +8,7 @@ exports.getAllProducts = (req, res, next) => {
         product.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + product.imageUrl;
         return product;
       });
+      
       res.status(200).json(mappedProducts);
     }
   ).catch(
