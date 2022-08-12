@@ -149,37 +149,82 @@ function affichagePanier() {
 
 affichagePanier();
 
-
-
-
 function formulaireContact() {
-  
+
+const formulaire = document.getElementsByClassName("cart__order__form")
 const order =  document.getElementById("order") 
-const formFirstName = document.getElementById("firstName")
-const formLastName = document.getElementById("lastName")
-const formAddress = document.getElementById("address")
-const formCity = document.getElementById("city")
-const formEmail = document.getElementById("email")
+const regExName = /[^a-zA-Z]/;
+const regExAddress = /^[a-zA-Z0-9\s,'-]$/;
+const refExEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
-let firstName = "";
-let lastName = "";
-let address = "";
-let city = "";
-let email = "";
-
-let contact = {
-  firstName: firstName,
-  lastName: lastName,
-  address: address,
-  city: city,
-  email: email };
 
 
 order.addEventListener("click",function(event){
   event.preventDefault()
-  // maintenant faut verifier que tout ce qui a était saisie est correct    -->   RegExp([A-Za-z]) 
-  // si tous est correct alors declarer les variables
-  // puis submit
+
+let firstName = document.getElementById("firstName").value;
+let lastName = document.getElementById("lastName").value;
+let address = document.getElementById("address").value;
+let city = document.getElementById("city").value;
+let email = document.getElementById("email").value;
+
+let firstNameValid = false;
+let lastNameValid = false;
+let addressValid = false;
+let cityValid = false;
+let emailValid = false;
+
+  
+  if(firstName.search(regExName)==-1 ){
+    console.log("prenom valide")
+    firstNameValid = true;
+
+  }
+  else{
+    alert("Prénom invalide");
+  }
+  if(lastName.search(regExName)==-1 ){
+      console.log("nom valide");
+      lastNameValid= true
+    }
+  else{
+      alert("Nom invalide");
+    }
+  if(address.search(regExAddress)==-1){
+      console.log("address valide");
+      addressValid = true
+    }
+  else{
+      alert("adresse invalide");
+    }
+  if(city.search(regExName)==-1){
+      console.log("ville valide")
+      cityValid = true
+    }
+  else{
+      alert("Ville invalide");
+    }
+  if(email.search(refExEmail)==-1){
+      alert("Email invalide");
+      emailValid = true
+    }
+  else{
+      console.log("email valide");
+    }
+
+if(firstNameValid==true && lastNameValid==true && addressValid==true && cityValid==true && emailValid==true){
+  
+  let contact = {
+    firstName: firstName,
+    lastName: lastName,
+    address: address,
+    city: city,
+    email: email };
+}
+      
+formulaire[0].submit();
+  
+  
 
 });
 
