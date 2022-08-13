@@ -151,8 +151,7 @@ affichagePanier();
 
 function formulaireContact() {
 
-
-const order =  document.getElementById("order") 
+const orderBtn =  document.getElementById("order") 
 const regExName = /[^a-zA-Z]/;
 const regExAddress = /^[a-zA-Z0-9\s,'-]$/;
 const refExEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -165,7 +164,7 @@ console.log(products)
 
 
 
-order.addEventListener("click",function(event){
+orderBtn.addEventListener("click",function(event){
   event.preventDefault()
 
 let firstName = document.getElementById("firstName").value;
@@ -228,16 +227,16 @@ if(firstNameValid==true && lastNameValid==true && addressValid==true && cityVali
     city: city,
     email: email };
 
-console.log("contact = "+JSON.stringify(contact))
-
-fetch("http://localhost:3000/api/products/",{
-  method: "POST",
+  console.log("contact = "+JSON.stringify(contact))
+let orderPost = {
+  method: "POST"/order,
   headers: {
     'Accept': 'application/json', 
     'Content-Type': 'application/json' 
   },
   body: JSON.stringify({contact, products})
-})
+};
+fetch("http://localhost:3000/api/products/", orderPost)
 .then(function(res) {
     if (res.ok) {
       return res.json(); 
