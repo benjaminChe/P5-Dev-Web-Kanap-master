@@ -228,6 +228,7 @@ if(firstNameValid==true && lastNameValid==true && addressValid==true && cityVali
     email: email };
 
   console.log("contact = "+JSON.stringify(contact))
+  
 let orderPost = {
   method: "POST"/order,
   headers: {
@@ -236,6 +237,7 @@ let orderPost = {
   },
   body: JSON.stringify({contact, products})
 };
+
 fetch("http://localhost:3000/api/products/", orderPost)
 .then(function(res) {
     if (res.ok) {
