@@ -38,7 +38,7 @@ function calculerPrixQte(){
 function affichagePanier() {
   const interfacePanier = document.getElementById("cart__items");
   let panier = JSON.parse(localStorage.getItem("panier"));
-  console.log("panier.lenght = "+ panier.length);
+  
   const divPrixTotal = document.getElementById("totalPrice")
   const divQuantiteTotal = document.getElementById("totalQuantity")
   const btnDelete = document.getElementsByClassName("deleteItem")
@@ -152,8 +152,8 @@ affichagePanier();
 function formulaireContact() {
 
 const orderBtn =  document.getElementById("order") 
-const regExName = /[^a-zA-Z]/;
-const regExAddress = /^[a-zA-Z0-9\s,'-]$/;
+const regExName = /[a-z]+/;
+const regExAddress = /[a-z]+/;
 const refExEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 let panier = JSON.parse(localStorage.getItem("panier"));
 let products = []
@@ -173,41 +173,49 @@ let address = document.getElementById("address").value;
 let city = document.getElementById("city").value;
 let email = document.getElementById("email").value;
 
+let pl = products.length
+console.log("pl = "+pl)
+
 let firstNameValid = false;
 let lastNameValid = false;
 let addressValid = false;
 let cityValid = false;
 let emailValid = false;
+if(pl===0){
+  alert("le panier est vide")
+}
+else{
+
 
   
   if(firstName.search(regExName)==-1 ){
-    console.log("prenom valide")
-    firstNameValid = true;
+    alert("Prénom invalide");
 
   }
   else{
-    alert("Prénom invalide");
+    console.log("prenom valide")
+    firstNameValid = true;
   }
   if(lastName.search(regExName)==-1 ){
+      alert("Nom invalide");
+    }
+  else{
       console.log("nom valide");
       lastNameValid= true
     }
-  else{
-      alert("Nom invalide");
-    }
   if(address.search(regExAddress)==-1){
+      alert("adresse invalide");
+    }
+  else{
       console.log("address valide");
       addressValid = true
     }
-  else{
-      alert("adresse invalide");
-    }
   if(city.search(regExName)==-1){
+      alert("Ville invalide");
+    }
+  else{
       console.log("ville valide")
       cityValid = true
-    }
-  else{
-      alert("Ville invalide");
     }
   if(email.search(refExEmail)==-1){
       alert("Email invalide");
@@ -244,12 +252,16 @@ let emailValid = false;
   })
   .then(function(res) {
       console.log(res);
+     
       window.location.href = 'confirmation.html?orderId='+res.orderId;
+      
   })
   .catch(function(res){ console.log(res) })
-    
-}
-});
+
+  localStorage.clear();
+  
+}}}
+);
 
 }
 

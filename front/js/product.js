@@ -50,7 +50,16 @@ function AjouterAuPanier(){
 
     let quantité = document.getElementById("quantity").value;
     let CouleurChoisie = document.getElementById('colors').value;
-    
+
+    if(CouleurChoisie===""){
+        alert("merci de selectionner une couleur !")
+    }
+    else if(quantité==0){
+        alert("merci de saisir une quantité superieur a 0 !")
+    }
+    // executer le reste du code uniquement si les conditions du dessus sont remplis 
+    else{
+
     let lignePanier = {
         id: id,
         couleur: CouleurChoisie,
@@ -87,7 +96,7 @@ function AjouterAuPanier(){
     localStorage.setItem("panier", JSON.stringify(panier))
     console.log("Nouveau panier");
     console.log(panier);
-}
+}}
 
 const BoutonAjouterAuPanier = document.getElementById("addToCart");
 
